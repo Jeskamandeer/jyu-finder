@@ -1,7 +1,12 @@
-version: "3.9"  # optional since v1.27.0
+version: "3.9"
 services:
   backend:
     container_name: finder-backend
     build: ./backend
     ports:
       - "8080:8080"
+  frontend:
+    container_name: finder-frontend
+    build: ./frontend
+    ports:
+      - "3000:3000"

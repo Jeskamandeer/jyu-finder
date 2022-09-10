@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://localhost:*",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -18,6 +18,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/")
 async def root():
@@ -29,5 +30,5 @@ async def root():
 async def get_freetimes(date_s=date.today(), min_duration=1.0):
     
     freetimes = timeslot_parser.get_freetimes(date_s, int(min_duration))
-    
+
     return JSONResponse(content=freetimes)

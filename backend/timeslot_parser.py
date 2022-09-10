@@ -17,6 +17,8 @@ def fetch_page(url: str):
 
 def parse_page(soup, min_duration: float):
     free_slots = soup.findAll("div", attrs={"class": "free slot"})
+    
+    # Gets rooms metainfo
     room_info = soup.find("span", attrs={"class": "room-info"}).getText()
     room_info = (
         room_info.replace("(", "")
@@ -25,14 +27,14 @@ def parse_page(soup, min_duration: float):
         .replace(" ", "")
         .replace(",", ", ")
     )
-    ff = []
+    freetimes = []
 
     for free_slot in free_slots:
         start_time = int(free_slot["data-minfromdaystart"]) / 60 + 8.0
         duration = int(free_slot["data-min"]) / 60
 
         if duration >= min_duration:
-            ff.append(
+            freetimes.append(
                 {
                     "Start time": start_time,
                     "End time": start_time + duration,
@@ -41,7 +43,7 @@ def parse_page(soup, min_duration: float):
                 }
             )
 
-    return ff
+    return freetimes
 
 
 def get_freetimes(date_s=date.today(), min_duration=1.0):
@@ -51,13 +53,15 @@ def get_freetimes(date_s=date.today(), min_duration=1.0):
         c_url = f"{url}{room}?date={date_s}"
 
         soup = fetch_page(c_url)
+        freetimes =  parse_page(soup, min_duration)
 
-        json_array.append(
-            {
-                "Room": c_url,
-                "Room Code": room.replace("%20", ""),
-                "Free times": parse_page(soup, min_duration),
-            }
+        if len(freetimes) > 0:
+            json_array.append(
+                {
+                    "Room": c_url,
+                    "Room Code": room.replace("%20", ""),
+                    "Free times": freetimes
+                }
         )
 
     # Serializing json

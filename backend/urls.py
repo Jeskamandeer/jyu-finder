@@ -10,3 +10,12 @@ kirjasto_rooms = [
     "BYP%2055.1",
     "BYP%2055.2"
 ]
+
+
+agora_rooms = []
+
+mad_rooms = []
+
+maa_rooms = []
+
+
