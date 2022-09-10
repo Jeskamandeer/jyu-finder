@@ -221,6 +221,22 @@ const Reservation = ({res}) => {
   )
 }
 
+
+const ResList = ({reservations}) => {
+  console.log(reservations)
+  if(reservations.length === 0){
+    return (<p>loading...</p>)
+  }
+
+  return (
+    <div>
+      {reservations.map(res =>
+      <Reservation key={res.Room} res={res}></Reservation>
+    )}
+    </div>
+  )
+}
+
 const Form = ({search, places}) => {
   const [place, setPlace] = useState("")
   const [date, setDate] = useState(new Date())
@@ -232,9 +248,8 @@ const Form = ({search, places}) => {
     const newRes = {
       place: place,
       date: date.toISOString().slice(0, 10),
-      length: Math.round(editedTime*10) / 10
+      min_duration: Math.round(editedTime*10) / 10
     }
-    console.log(newRes)
     search(newRes)
     setPlace("")
     setTime(null)
@@ -282,20 +297,28 @@ const App = () => {
 
 
   useEffect(() => {
-    setReservations(test)
+    backendService.getAll()
+    .then(response => {
+      let res = JSON.parse(response)
+      setReservations(res)
+    })
+    console.log(reservations) 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const search = (newRes) => {
     backendService.get(newRes)
+    .then(response => {
+      let res = JSON.parse(response)
+      setReservations(res)
+    })
   }
 
   return(
     <div>
       <h1>Varausbotti 3000</h1>
       <Form search={search} places={places}/>
-      {reservations.map(res =>
-        <Reservation key={res.Room} res={res}></Reservation>
-      )}
+      <ResList reservations={reservations}/>
     </div>
   )
 }
