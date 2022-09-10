@@ -3,3 +3,4 @@ uvicorn
 pydantic
 requests
 beautifulsoup4
+lxml

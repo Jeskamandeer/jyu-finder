@@ -35,7 +35,7 @@ def parse_page(soup, min_duration:float):
     
     return ff
 
-def main(date_s=date.today(), min_duration=1.0):
+def get_freetimes(date_s=date.today(), min_duration=1.0):
     json_array = []
 
     for room in urls.kirjasto_rooms:
@@ -48,12 +48,11 @@ def main(date_s=date.today(), min_duration=1.0):
             "Room Code": room.replace("%20", ""),
             "Free times": parse_page(soup, min_duration)
         })
+        
     # Serializing json
-    json_object = json.dumps(json_array, indent=4, ensure_ascii=False)
+    json_object = json.dumps(json_array, ensure_ascii=False)
     
-    # Writing to sample.json
-    with open("output.json", "w") as outfile:
-        outfile.write(json_object)
+    return json_object
 
 if __name__ == "__main__":
-    main()
+    get_freetimes()
