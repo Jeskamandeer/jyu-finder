@@ -62,7 +62,7 @@ const ResList = ({ reservations, building }) => {
   );
 };
 
-const Form = ({ search, places }) => {
+const Form = ({ search, places, handlePlace }) => {
   const [place, setPlace] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(null);
@@ -75,7 +75,8 @@ const Form = ({ search, places }) => {
       date: date.toISOString().slice(0, 10),
       min_duration: Math.round(editedTime * 10) / 10,
     };
-    search(newRes, place);
+    search(newRes);
+    handlePlace(place);
     setPlace("");
     setTime(null);
     setTime(null);
@@ -137,18 +138,21 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const search = ({ newRes, building }) => {
-    setSelectedBuilding(building);
+  const search = (newRes) => {
     backendService.get(newRes).then((response) => {
       let res = JSON.parse(response);
       setReservations(res);
     });
   };
 
+  const handlePlace = (building) => {
+    setSelectedBuilding(building);
+  };
+
   return (
     <div>
       <h1>MyJYU Finder</h1>
-      <Form search={search} places={places} />
+      <Form search={search} places={places} handlePlace={handlePlace} />
       <ResList reservations={reservations} building={selectedBuilding} />
     </div>
   );
