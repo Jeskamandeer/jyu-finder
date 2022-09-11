@@ -57,7 +57,7 @@ def parse_page(soup, min_duration: int) -> list:
     return freetimes
 
 
-def get_room_codes(selected_buildings: list) -> list:
+def get_room_codes(selected_buildings: str) -> list:
     """
     Gets room codes from selected buildings
 
@@ -69,33 +69,33 @@ def get_room_codes(selected_buildings: list) -> list:
     """
     rooms = []
 
-    if "kirjasto" in selected_buildings:
+    if "Lähde" in selected_buildings:
         rooms.extend(constants.kirjasto_rooms)
 
-    if "agora" in selected_buildings:
+    if "Agora" in selected_buildings:
         rooms.extend(constants.agora_rooms)
 
-    if "maa" in selected_buildings:
+    if "MaA" in selected_buildings:
         rooms.extend(constants.maa_rooms)
 
-    if "mad" in selected_buildings:
+    if "MaD" in selected_buildings:
         rooms.extend(constants.mad_rooms)
 
     return rooms
 
 
 def get_freetimes(
-    date_s: str,
+    date: str,
     min_duration: int,
-    selected_buildings: list,
+    building: str,
 ):
 
     free_rooms = []
 
-    selected_rooms = get_room_codes(selected_buildings)
+    selected_rooms = get_room_codes(building)
 
     for room_code in selected_rooms:
-        c_url = f"https://kovs-calendar.app.jyu.fi/room/{room_code}?date={date_s}"
+        c_url = f"https://kovs-calendar.app.jyu.fi/room/{room_code}?date={date}"
 
         soup = fetch_page(c_url)
         freetimes = parse_page(soup, min_duration)
@@ -114,7 +114,7 @@ def get_freetimes(
 
 if __name__ == "__main__":
     payload = get_freetimes(
-        date_s=date.today(), min_duration=60, selected_buildings=["kirjasto"]
+        date='2022-09-12', min_duration=60, building="Agora"
     )
 
     with open("test_payload.json", "w") as outfile:

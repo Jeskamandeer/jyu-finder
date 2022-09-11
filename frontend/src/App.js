@@ -48,7 +48,6 @@ const Reservation = ({ res }) => {
 };
 
 const ResList = ({ reservations, building }) => {
-  console.log(reservations);
   if (reservations.length === 0) {
     return <p>loading...</p>;
   }
@@ -71,7 +70,7 @@ const Form = ({ search, places, handlePlace }) => {
   const submit = (event) => {
     event.preventDefault();
     const newRes = {
-      place: place,
+      building: place,
       date: date.toISOString().slice(0, 10),
       min_duration: time,
     };
@@ -133,10 +132,9 @@ const App = () => {
 
   useEffect(() => {
     backendService.getAll().then((response) => {
-      let res = JSON.parse(response);
+      let res = response;
       setReservations(res);
     });
-    console.log(reservations);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

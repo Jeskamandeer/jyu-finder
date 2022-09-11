@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 import timeslot_parser
 from fastapi.responses import JSONResponse
-from datetime import date
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 app = FastAPI()
@@ -26,12 +25,12 @@ async def root():
 
 
 @app.get("/get_freetimes")
-async def get_freetimes(date_s=date.today(), min_duration=60, buildings=["kirjasto"]):
+async def get_freetimes(date, min_duration=60, building="Lähde"):
 
     freetimes = timeslot_parser.get_freetimes(
-        date_s=date_s,
+        date=date,
         min_duration=int(min_duration),
-        selected_buildings=buildings,
+        building=building,
     )
 
     return JSONResponse(content=freetimes)
