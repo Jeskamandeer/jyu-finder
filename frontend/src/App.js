@@ -69,11 +69,10 @@ const Form = ({ search, places, handlePlace }) => {
 
   const submit = (event) => {
     event.preventDefault();
-    let editedTime = parseFloat(time / 60);
     const newRes = {
       place: place,
       date: date.toISOString().slice(0, 10),
-      min_duration: Math.round(editedTime * 10) / 10,
+      min_duration: time,
     };
     search(newRes);
     handlePlace(place);
@@ -113,11 +112,14 @@ const Form = ({ search, places, handlePlace }) => {
         </div>
         <div>
           Kesto:
-          <input
-            name="min"
-            type="number"
-            onChange={({ target }) => setTime(target.value)}
-          />
+          <select
+            value={time}
+            onChange={({ target }) => setTime(parseInt(target.value))}
+          >
+            <option value="60">1h</option>
+            <option value="120">2h</option>
+            <option value="240">3h</option>
+          </select>
         </div>
         <button type="submit">Hae tiloja</button>
       </form>
