@@ -144,7 +144,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Varausbotti 3000</h1>
+      <h1>MyJYU Finder</h1>
       <Form search={search} places={places} />
       <ResList reservations={reservations} />
     </div>
