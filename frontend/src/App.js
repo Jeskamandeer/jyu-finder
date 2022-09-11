@@ -76,9 +76,6 @@ const Form = ({ search, places, handlePlace }) => {
     };
     search(newRes);
     handlePlace(place);
-    setPlace("");
-    setTime(null);
-    setTime(null);
   };
 
   return (
@@ -88,7 +85,7 @@ const Form = ({ search, places, handlePlace }) => {
         <div>
           Tila:
           <select
-            name="valitse"
+            name="paikka"
             value={place}
             onChange={({ target }) => setPlace(target.value)}
           >
@@ -113,9 +110,11 @@ const Form = ({ search, places, handlePlace }) => {
         <div>
           Kesto:
           <select
+            name="aika"
             value={time}
             onChange={({ target }) => setTime(parseInt(target.value))}
           >
+            <option value="">Ei aikaa</option>
             <option value={60}>1h</option>
             <option value={120}>2h</option>
             <option value={240}>3h</option>
