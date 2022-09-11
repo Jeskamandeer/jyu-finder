@@ -5,8 +5,16 @@ services:
     build: ./backend
     ports:
       - "8080:8080"
+    environment:
+      - FRONTEND_URL="http://localhost:3000"
   frontend:
     container_name: finder-frontend
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args:
+        - ENV_FILE=.env.development
     ports:
       - "3000:3000"
+    environment:
+      - BACKEND_URL="http://localhost:8080"
+    

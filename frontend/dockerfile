@@ -1,15 +1,19 @@
 
 FROM node:16-alpine 
 # Set the working directory to /app inside the container
+
 WORKDIR /app
 COPY . .
 
+ARG ENV_FILE
+COPY ${ENV_FILE} .env.production
+
 # ==== BUILD =====
+
 RUN npm ci 
 RUN npm run build
 
 # ==== RUN =======
-ENV NODE_ENV production
 
 EXPOSE 3000
 

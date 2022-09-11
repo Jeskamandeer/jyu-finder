@@ -3,6 +3,7 @@ import backendService from "./services/backendService";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 let places = [
   {
     id: 1,
@@ -141,7 +142,7 @@ const App = () => {
 
   const search = (newRes) => {
     backendService.get(newRes).then((response) => {
-      let res = JSON.parse(response);
+      let res = response;
       setReservations(res);
     });
   };
