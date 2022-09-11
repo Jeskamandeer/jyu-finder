@@ -46,7 +46,7 @@ const Reservation = ({ res }) => {
   );
 };
 
-const ResList = ({ reservations }) => {
+const ResList = ({ reservations, building }) => {
   console.log(reservations);
   if (reservations.length === 0) {
     return <p>loading...</p>;
@@ -54,6 +54,7 @@ const ResList = ({ reservations }) => {
 
   return (
     <div>
+      <h2>{building}</h2>
       {reservations.map((res) => (
         <Reservation key={res.Room} res={res}></Reservation>
       ))}
@@ -74,7 +75,7 @@ const Form = ({ search, places }) => {
       date: date.toISOString().slice(0, 10),
       min_duration: Math.round(editedTime * 10) / 10,
     };
-    search(newRes);
+    search(newRes, place);
     setPlace("");
     setTime(null);
     setTime(null);
@@ -125,6 +126,7 @@ const Form = ({ search, places }) => {
 
 const App = () => {
   const [reservations, setReservations] = useState([]);
+  const [selectedBuilding, setSelectedBuilding] = useState("");
 
   useEffect(() => {
     backendService.getAll().then((response) => {
@@ -135,7 +137,8 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const search = (newRes) => {
+  const search = ({ newRes, building }) => {
+    setSelectedBuilding(building);
     backendService.get(newRes).then((response) => {
       let res = JSON.parse(response);
       setReservations(res);
@@ -146,7 +149,7 @@ const App = () => {
     <div>
       <h1>MyJYU Finder</h1>
       <Form search={search} places={places} />
-      <ResList reservations={reservations} />
+      <ResList reservations={reservations} building={selectedBuilding} />
     </div>
   );
 };
