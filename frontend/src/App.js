@@ -112,7 +112,10 @@ const Form = ({ search, places, handlePlace }) => {
         </div>
         <div>
           Kesto:
-          <select value={time} onChange={({ target }) => setTime(target.value)}>
+          <select
+            value={time}
+            onChange={({ target }) => setTime(parseInt(target.value))}
+          >
             <option value={60}>1h</option>
             <option value={120}>2h</option>
             <option value={240}>3h</option>
