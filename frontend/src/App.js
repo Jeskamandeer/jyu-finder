@@ -195,28 +195,31 @@ const Form = ({ search, places, handlePlace }) => {
 const Footer = () => {
   return (
     <footer>
-      <Container maxwidth="lg">
-        <Grid container spacing={5}>
-          <Grid item xs={12} sm={4}>
-            <Box borderBottom={1} color="inherit">
-              Jeremias Colliander
-            </Box>
-            <Box borderBottom={1} color="inherit">
-              Topi Kanninen
-            </Box>
+      <Box
+        px={{ xs: 3, sm: 10 }}
+        py={{ xs: 5, sm: 10 }}
+        bgcolor="text.secondary"
+        color="white"
+      >
+        <Container maxwidth="lg">
+          <Grid container spacing={5}>
+            <Grid item xs={12} sm={4}>
+              <Box color="inherit">Jeremias Colliander</Box>
+              <Box color="inherit">Topi Kanninen</Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Box color="inherit">
+                <Link
+                  href="https://github.com/jeskamandeer/jyu-finder"
+                  color="inherit"
+                >
+                  GitHub
+                </Link>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Box borderBottom={1} color="inherit">
-              <Link
-                href="https://github.com/jeskamandeer/jyu-finder"
-                color="inherit"
-              >
-                GitHub
-              </Link>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </Box>
     </footer>
   );
 };
