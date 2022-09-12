@@ -74,6 +74,7 @@ const Reservation = ({ res }) => {
 };
 
 const ResList = ({ reservations, building }) => {
+  console.log(reservations);
   if (reservations.length === 0) {
     return (
       <Typography
