@@ -14,7 +14,9 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
+import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 let places = [];
 
@@ -190,6 +192,35 @@ const Form = ({ search, places, handlePlace }) => {
   );
 };
 
+const Footer = () => {
+  return (
+    <footer>
+      <Container maxwidth="lg">
+        <Grid container spacing={5}>
+          <Grid item xs={12} sm={4}>
+            <Box borderBottom={1} color="inherit">
+              Jeremias Colliander
+            </Box>
+            <Box borderBottom={1} color="inherit">
+              Topi Kanninen
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box borderBottom={1} color="inherit">
+              <Link
+                href="https://github.com/jeskamandeer/jyu-finder"
+                color="inherit"
+              >
+                GitHub
+              </Link>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+    </footer>
+  );
+};
+
 const App = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedBuilding, setSelectedBuilding] = useState("");
@@ -222,6 +253,7 @@ const App = () => {
       </AppBar>
       <Form search={search} places={places} handlePlace={handlePlace} />
       <ResList reservations={reservations} building={selectedBuilding} />
+      <Footer />
     </Box>
   );
 };
