@@ -51,7 +51,7 @@ const Reservation = ({ res }) => {
           variant="h7"
           component="div"
         >
-          Room Info
+          {times[0]["Room info"]}
         </Typography>
         <Button
           sx={{ mt: 2, mb: 2, mx: 2, width: 0.3 }}
@@ -148,13 +148,11 @@ const Form = ({ search, places, handlePlace }) => {
         }}
       >
         <FormControl>
-          <InputLabel id="building-select" value={"Lähde"}>
-            Lähde
-          </InputLabel>
+          <InputLabel id="building-select">Rakennus</InputLabel>
           <Select
             labelId="building-select"
             id="building-select"
-            value={place}
+            value={"Lähde"}
             onChange={({ target }) => setPlace(target.value)}
           >
             <MenuItem value={"Lähde"}>Lähde</MenuItem>
