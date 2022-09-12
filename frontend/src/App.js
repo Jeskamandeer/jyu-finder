@@ -74,7 +74,6 @@ const Reservation = ({ res }) => {
 };
 
 const ResList = ({ reservations, building }) => {
-  console.log(reservations);
   if (reservations.length === 0) {
     return (
       <Typography
@@ -112,7 +111,7 @@ const ResList = ({ reservations, building }) => {
 const Form = ({ search, places, handlePlace }) => {
   const [place, setPlace] = useState("");
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(null);
+  const [time, setTime] = useState(60);
 
   const submit = (event) => {
     event.preventDefault();
@@ -152,7 +151,7 @@ const Form = ({ search, places, handlePlace }) => {
           <Select
             labelId="building-select"
             id="building-select"
-            value={"Lähde"}
+            value={place}
             onChange={({ target }) => setPlace(target.value)}
           >
             <MenuItem value={"Lähde"}>Lähde</MenuItem>
