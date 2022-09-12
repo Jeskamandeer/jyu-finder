@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import backendService from "./services/backendService";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import InputLabel from '@mui/material/InputLabel';
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import InputLabel from "@mui/material/InputLabel";
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 
-
-
-let places = [
-];
+let places = [];
 
 const Reservation = ({ res }) => {
   let times = res["Free times"];
@@ -34,26 +31,41 @@ const Reservation = ({ res }) => {
 
   return (
     <Grid sx={{ width: 1 }}>
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-    }}>
-      <Typography sx={{ mt: 4, mb: 2, width: 0.3}} variant="h6" component="div">
-        {res["Room Code"]}
-      </Typography>
-      <Typography sx={{ mt: 4, mb: 2, mx: 2, width: 0.4}} variant="h7" component="div">
-        Room Info
-      </Typography>
-      <Button sx={{ mt: 2, mb: 2, mx: 2, width: 0.3}} variant="contained" color="success" onClick={() => redirect()}>
-        Varaa
-      </Button>
-    </div>
-      <List >
-      {times.map((t) => (
-        <Typography item key={t["Start time"]}>
-          {t["Start time"]} - {t["End time"]}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          sx={{ mt: 4, mb: 2, width: 0.3 }}
+          variant="h6"
+          component="div"
+        >
+          {res["Room Code"]}
         </Typography>
-      ))}
+        <Typography
+          sx={{ mt: 4, mb: 2, mx: 2, width: 0.4 }}
+          variant="h7"
+          component="div"
+        >
+          Room Info
+        </Typography>
+        <Button
+          sx={{ mt: 2, mb: 2, mx: 2, width: 0.3 }}
+          variant="contained"
+          color="success"
+          onClick={() => redirect()}
+        >
+          Varaa
+        </Button>
+      </div>
+      <List>
+        {times.map((t) => (
+          <Typography item key={t["Start time"]}>
+            {t["Start time"]} - {t["End time"]}
+          </Typography>
+        ))}
       </List>
     </Grid>
   );
@@ -61,21 +73,35 @@ const Reservation = ({ res }) => {
 
 const ResList = ({ reservations, building }) => {
   if (reservations.length === 0) {
-    return <p>loading...</p>;
+    return (
+      <Typography
+        sx={{ mt: 4, mb: 2 }}
+        variant="h4"
+        component="div"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Ei vapaita tiloja
+      </Typography>
+    );
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
-    <div >
-
-      {reservations.map((res) => (
-        <Reservation key={res.Room} res={res}></Reservation>
-      ))}
-    </div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div>
+        {reservations.map((res) => (
+          <Reservation key={res.Room} res={res}></Reservation>
+        ))}
+      </div>
     </div>
   );
 };
@@ -97,21 +123,29 @@ const Form = ({ search, places, handlePlace }) => {
   };
 
   return (
-    <div >
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div" style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+    <div>
+      <Typography
+        sx={{ mt: 4, mb: 2 }}
+        variant="h4"
+        component="div"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         Hae vapaat tilat:
       </Typography>
-      <form onSubmit={submit} style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <FormControl>
-        <InputLabel id="building-select">Rakennus</InputLabel>
+      <form
+        onSubmit={submit}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <FormControl>
+          <InputLabel id="building-select">Rakennus</InputLabel>
           <Select
             labelId="building-select"
             id="building-select"
@@ -125,21 +159,21 @@ const Form = ({ search, places, handlePlace }) => {
           </Select>
           <br></br>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <MobileDatePicker
-            inputFormat="DD.MM.YYYY"
-            labelId="date-picker"
-            value={date}
-            onChange={(date) => setDate(date)}
-            renderInput={(params) => <TextField {...params} />}
-            label="Päivä"
-          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MobileDatePicker
+              inputFormat="DD.MM.YYYY"
+              labelId="date-picker"
+              value={date}
+              onChange={(date) => setDate(date)}
+              renderInput={(params) => <TextField {...params} />}
+              label="Päivä"
+            />
           </LocalizationProvider>
           <br></br>
           <TextField
             label="Kesto"
             value={time}
-            select 
+            select
             onChange={({ target }) => setTime(parseInt(target.value))}
           >
             <MenuItem value={60}>1h</MenuItem>
@@ -147,8 +181,10 @@ const Form = ({ search, places, handlePlace }) => {
             <MenuItem value={240}>3h</MenuItem>
           </TextField>
           <br></br>
-        <Button variant="contained" type="submit">Hae</Button>
-      </FormControl>
+          <Button variant="contained" type="submit">
+            Hae
+          </Button>
+        </FormControl>
       </form>
     </div>
   );
@@ -178,11 +214,11 @@ const App = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent:"center", alignItems: 'center' }}>
+    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}>
       <AppBar position="static">
-      <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-        MyJYU Finder
-      </Typography>
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          MyJYU Finder
+        </Typography>
       </AppBar>
       <Form search={search} places={places} handlePlace={handlePlace} />
       <ResList reservations={reservations} building={selectedBuilding} />
