@@ -40,7 +40,7 @@ const Reservation = ({ res }) => {
   };
 
 
-  return(
+  /* return(
     <div style={({display: 'flex', alignItems: 'center'})}>
     <TableContainer component={Paper}>
       <Table sx={{minWidth: 650}} arial-label="simple table">
@@ -73,9 +73,9 @@ const Reservation = ({ res }) => {
       </Table>
     </TableContainer>
     </div>
-  )
+  ) */
 
-/*   return (
+  return (
     <Grid sx={{ width: 1 }}>
     <div style={{
       display: 'flex',
@@ -99,7 +99,7 @@ const Reservation = ({ res }) => {
       ))}
       </List>
     </Grid>
-  ); */
+  );
 };
 
 const ResList = ({ reservations, building }) => {
