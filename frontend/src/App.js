@@ -148,7 +148,9 @@ const Form = ({ search, places, handlePlace }) => {
         }}
       >
         <FormControl>
-          <InputLabel id="building-select">Rakennus</InputLabel>
+          <InputLabel id="building-select" value={"Lähde"}>
+            Lähde
+          </InputLabel>
           <Select
             labelId="building-select"
             id="building-select"
@@ -182,6 +184,8 @@ const Form = ({ search, places, handlePlace }) => {
             <MenuItem value={60}>1h</MenuItem>
             <MenuItem value={120}>2h</MenuItem>
             <MenuItem value={240}>3h</MenuItem>
+            <MenuItem value={300}>4h</MenuItem>
+            <MenuItem value={360}>5h</MenuItem>
           </TextField>
           <br></br>
           <Button variant="contained" type="submit">
