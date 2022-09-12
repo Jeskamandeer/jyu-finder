@@ -15,6 +15,14 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 let places = [
 ];
@@ -30,7 +38,43 @@ const Reservation = ({ res }) => {
     window.location.href = link;
   };
 
-  return (
+
+  return(
+    <div style={({display: 'flex', alignItems: 'center'})}>
+    <TableContainer component={Paper}>
+      <Table sx={{minWidth: 650}} arial-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>
+            <Typography sx={{ mt: 4, mb: 2, width: 0.3}} variant="h6" component="div">{res["Room Code"]}</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography sx={{ mt: 4, mb: 2, mx: 2, width: 0.4}} variant="h7" component="div">
+              Room Info
+              </Typography>
+            </TableCell>
+            <TableCell>
+            <Button sx={{ mt: 2, mb: 2, mx: 2, width: 0.3}} variant="contained" color="success" onClick={() => redirect()}>
+              Varaa
+            </Button>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {times.map((t) => (
+            <TableRow>
+            <Typography item key={t["Start time"]}>
+            {t["Start time"]} - {t["End time"]}
+            </Typography>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </div>
+  )
+
+/*   return (
     <Grid sx={{ width: 1 }}>
     <div style={{
       display: 'flex',
@@ -54,7 +98,7 @@ const Reservation = ({ res }) => {
       ))}
       </List>
     </Grid>
-  );
+  ); */
 };
 
 const ResList = ({ reservations, building }) => {
