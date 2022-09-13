@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import backendService from "./services/backendService";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "@mui/material/Button";
@@ -120,6 +120,7 @@ const Form = ({ search, places, handlePlace }) => {
       date: date.toISOString().slice(0, 10),
       min_duration: time,
     };
+    console.log(newRes)
     search(newRes);
     handlePlace(place);
   };
@@ -157,7 +158,7 @@ const Form = ({ search, places, handlePlace }) => {
             <MenuItem value={"Lähde"}>Lähde</MenuItem>
             <MenuItem value={"Agora"}>Agora</MenuItem>
             <MenuItem value={"MaD"}>MaD</MenuItem>
-            <MenuItem value={"MaD"}>MaA</MenuItem>
+            <MenuItem value={"MaA"}>MaA</MenuItem>
           </Select>
           <br></br>
 
@@ -230,13 +231,13 @@ const App = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedBuilding, setSelectedBuilding] = useState("");
 
-  useEffect(() => {
+  /* useEffect(() => {
     backendService.getAll().then((response) => {
       let res = response;
       setReservations(res);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); */
 
   const search = (newRes) => {
     backendService.get(newRes).then((response) => {
