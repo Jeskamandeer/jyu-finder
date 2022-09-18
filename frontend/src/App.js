@@ -17,6 +17,8 @@ import AppBar from "@mui/material/AppBar";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 let places = [];
 
@@ -73,7 +75,9 @@ const Reservation = ({ res }) => {
   );
 };
 
-const ResList = ({ reservations, building }) => {
+const ResList = ({ reservations, building}) => {
+
+
   if (reservations.length === 0) {
     return (
       <Typography
@@ -120,7 +124,6 @@ const Form = ({ search, places, handlePlace }) => {
       date: date.toISOString().slice(0, 10),
       min_duration: time,
     };
-    console.log(newRes)
     search(newRes);
     handlePlace(place);
   };
@@ -230,20 +233,17 @@ const Footer = () => {
 const App = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedBuilding, setSelectedBuilding] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  /* useEffect(() => {
-    backendService.getAll().then((response) => {
-      let res = response;
-      setReservations(res);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); */
 
   const search = (newRes) => {
-    backendService.get(newRes).then((response) => {
-      let res = response;
-      setReservations(res);
+    setLoading(true)
+    backendService.get(newRes)
+    .then((response) => {
+      setReservations(response);
+      setLoading(false)
     });
+
   };
 
   const handlePlace = (building) => {
@@ -258,7 +258,11 @@ const App = () => {
         </Typography>
       </AppBar>
       <Form search={search} places={places} handlePlace={handlePlace} />
-      <ResList reservations={reservations} building={selectedBuilding} />
+      {loading ? 
+      (<Box sx={{margin: 2 , display: 'flex', justifyContent: "center", alignItems: "center"}}>
+        <CircularProgress />
+      </Box>)
+      : (<ResList reservations={reservations} building={selectedBuilding} />)}
       <Footer />
     </Box>
   );
