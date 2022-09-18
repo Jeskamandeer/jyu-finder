@@ -14,11 +14,11 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import CircularProgress from '@mui/material/CircularProgress';
-
+import GitHubIcon from '@mui/icons-material/GitHub';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 let places = [];
 
@@ -140,7 +140,6 @@ const Form = ({ search, places, handlePlace }) => {
           justifyContent: "center",
         }}
       >
-        Hae vapaat tilat:
       </Typography>
       <form
         onSubmit={submit}
@@ -200,33 +199,18 @@ const Form = ({ search, places, handlePlace }) => {
 
 const Footer = () => {
   return (
-    <footer>
-      <Box
-        px={{ xs: 3, sm: 10 }}
-        py={{ xs: 5, sm: 10 }}
-        bgcolor="text.secondary"
-        color="white"
-      >
-        <Container maxwidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={4}>
-              <Box color="inherit">Jeremias Colliander</Box>
-              <Box color="inherit">Topi Kanninen</Box>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box color="inherit">
-                <Link
-                  href="https://github.com/jeskamandeer/jyu-finder"
-                  color="inherit"
-                >
-                  GitHub
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </footer>
+    <Box sx={{ width: 500 }}>
+    <BottomNavigation
+      sx={{
+        width: '100%',
+        position: 'fixed',
+        bottom: 0
+      }}
+      showLabels
+    >
+        <BottomNavigationAction label="GitHub" href="https://github.com/Jeskamandeer/jyu-finder" icon={<GitHubIcon/>}></BottomNavigationAction>
+    </BottomNavigation>
+    </Box>
   );
 };
 
@@ -252,11 +236,31 @@ const App = () => {
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}>
-      <AppBar position="static">
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-          MyJYU Finder
-        </Typography>
+      <AppBar position="static" sx={{
+        width: "100%",
+        height: 40 ,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'flex' },
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            RoomForJYU
+          </Typography>
       </AppBar>
+      
       <Form search={search} places={places} handlePlace={handlePlace} />
       {loading ? 
       (<Box sx={{margin: 2 , display: 'flex', justifyContent: "center", alignItems: "center"}}>
