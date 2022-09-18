@@ -1,5 +1,7 @@
 # jyu-finder
 
+## By: Topi ja Jere
+
 Start frontend at 3000 and backend at 8080
 
 ```
