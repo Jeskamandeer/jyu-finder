@@ -16,9 +16,6 @@ import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CircularProgress from '@mui/material/CircularProgress';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 let places = [];
 
@@ -76,8 +73,6 @@ const Reservation = ({ res }) => {
 };
 
 const ResList = ({ reservations, building}) => {
-
-
   if (reservations.length === 0) {
     return (
       <Typography
@@ -196,24 +191,6 @@ const Form = ({ search, places, handlePlace }) => {
     </div>
   );
 };
-
-const Footer = () => {
-  return (
-    <Box sx={{ width: 500 }}>
-    <BottomNavigation
-      sx={{
-        width: '100%',
-        position: 'fixed',
-        bottom: 0
-      }}
-      showLabels
-    >
-        <BottomNavigationAction label="GitHub" href="https://github.com/Jeskamandeer/jyu-finder" icon={<GitHubIcon/>}></BottomNavigationAction>
-    </BottomNavigation>
-    </Box>
-  );
-};
-
 const App = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedBuilding, setSelectedBuilding] = useState("");
@@ -235,19 +212,18 @@ const App = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}>
+    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: "center", minHeight: "100vh"}}>
       <AppBar position="static" sx={{
         width: "100%",
         height: 40 ,
+        top: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'flex' },
@@ -260,14 +236,12 @@ const App = () => {
             RoomForJYU
           </Typography>
       </AppBar>
-      
       <Form search={search} places={places} handlePlace={handlePlace} />
       {loading ? 
       (<Box sx={{margin: 2 , display: 'flex', justifyContent: "center", alignItems: "center"}}>
         <CircularProgress />
       </Box>)
       : (<ResList reservations={reservations} building={selectedBuilding} />)}
-      <Footer />
     </Box>
   );
 };
