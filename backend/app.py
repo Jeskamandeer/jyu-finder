@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import logging
 app = FastAPI()
 
-origins = ["http://localhost:3000", "https://jyu-finder-6pgu3rfsea-lz.a.run.app"]
+origins = ["http://localhost:3000", "https://jyu-finder-6pgu3rfsea-lz.a.run.app", "https://only4jyu.fans"]
 
 logging.info(f"Using {origins} as origins")
 
